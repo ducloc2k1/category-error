@@ -1,0 +1,11 @@
+.album {
+  &__list {
+    display: flex;
+    list-style-type: none;
+    margin-left: -20px;
+  }
+
+  &__item {
+    margin-left: 20px;
+  }
+}

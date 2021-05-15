@@ -1,0 +1,11 @@
+.todolist {
+  li.completed {
+    color: #ccc;
+    text-decoration: line-through;
+    font-style: italic;
+  }
+
+  li {
+    font-size: 18px;
+  }
+}
