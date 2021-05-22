@@ -1,36 +1,32 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { decrease, increase } from "./counterSlice";
 
-// function usePersistentValue(initialValue) {
-//   console.log(React.useState(initialValue)[0]);
-// }
+CounterFeature.propTypes = {};
 
-function Counter() {
-  const [count, setCount] = React.useState(0);
+function CounterFeature(props) {
+  const counter = useSelector((state) => {
+    return state.counter;
+  });
 
-  let id = React.useState({ current: 0 })[0];
+  const dispatch = useDispatch();
 
-  console.log(id);
+  function handleIncrementClick() {
+    dispatch(increase());
+  }
 
-  const clearInterval = () => {
-    window.clearInterval(id.current);
-  };
-
-  React.useEffect(() => {
-    id.current = window.setInterval(() => {
-      setCount((c) => c + 1);
-    }, 1000);
-
-    console.log(id);
-
-    return clearInterval;
-  }, []);
+  function handleDecrementClick() {
+    dispatch(decrease());
+  }
 
   return (
     <div>
-      <h1>{count}</h1>
-      <button onClick={clearInterval}>Stop</button>
+      This is: {counter}
+      <button onClick={handleIncrementClick}>increase</button>
+      <button onClick={handleDecrementClick}>decrease</button>
     </div>
   );
 }
 
-export default Counter;
+export default CounterFeature;

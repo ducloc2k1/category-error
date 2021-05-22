@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import TodoList from "../../components/TodoList";
 import queryString from "query-string";
 import { useHistory, useLocation, useRouteMatch } from "react-router";
+import TodoForm from "../../components/TodoForm";
 
 ListPage.propTypes = {};
 
@@ -27,6 +28,18 @@ function ListPage(props) {
       price: 900,
     },
   ];
+
+  const onSubmit = (values) => {
+    const newTodo = {
+      id: todoList.length + 1,
+      title: values.title,
+      status: "new",
+    };
+
+    const newTodoList = [...todoList, newTodo];
+
+    setTodoList(newTodoList);
+  };
 
   const location = useLocation();
 
@@ -92,16 +105,14 @@ function ListPage(props) {
     });
   };
 
-  const rederedTodoList = useMemo(() => {
-    todoList.filter((todo) => {
-      return filterTodo === "all" || todo.status === filterTodo;
-    });
-  }, [todoList, filterTodo]);
+  const rederedTodoList = todoList.filter((todo) => {
+    return filterTodo === "all" || todo.status === filterTodo;
+  });
 
   return (
     <div>
       <TodoList todoList={rederedTodoList} onTodoClick={handleTodoClick} />
-
+      <TodoForm onSubmit={onSubmit} />
       <div>
         <button onClick={handleShowAll}>Show all</button>
         <button onClick={handleShowCompleted}>Show completed</button>

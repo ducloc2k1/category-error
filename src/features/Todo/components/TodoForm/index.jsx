@@ -15,11 +15,15 @@ TodoForm.defaultProps = {
   onSubmit: null,
 };
 
-function handleSubmit(values) {
-  console.log(`Form value: `, values);
-}
-
 function TodoForm(props) {
+  function handleSubmit(values) {
+    const { onSubmit } = props;
+    if (onSubmit) {
+      onSubmit(values);
+    }
+    console.log(`Form value: `, values);
+  }
+
   const schema = yup.object().shape({
     title: yup
       .string()
