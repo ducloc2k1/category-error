@@ -39,14 +39,18 @@ function RegisterForm(props) {
 
   function handleSubmit(values) {
     const { onSubmit } = props;
-    console.log(props);
     if (onSubmit) {
       onSubmit(values);
     }
     console.log(`Form value: `, values);
   }
 
-  const schema = yup.object().shape({});
+  const schema = yup.object().shape({
+    fullName: yup
+      .string()
+      .required('Please enter this field.')
+      .test('Should has at leaste two word', 'Please enter at least two words', (value) => value.split().length >= 2),
+  });
 
   const registerForm = useForm({
     defaultValues: {

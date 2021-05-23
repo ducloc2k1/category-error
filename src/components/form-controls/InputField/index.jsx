@@ -18,9 +18,8 @@ function InputField(props) {
       <Controller
         name={name}
         control={form.control}
-        rules={{ maxLength: 2 }}
         render={({ field, fieldState }) => {
-          const hasError = fieldState.error && fieldState.isTouched;
+          const hasError = fieldState.error;
           return (
             <TextField
               {...field}
