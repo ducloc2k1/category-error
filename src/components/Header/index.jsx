@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import StoreIcon from '@material-ui/icons/Store';
 import { default as React, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import RegisterForm from '../../features/Auth/components/RegisterForm';
 import './style.scss';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,9 +76,7 @@ function Header(props) {
         aria-labelledby='draggable-dialog-title'
       >
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates occasionally.
-          </DialogContentText>
+          <RegisterForm></RegisterForm>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color='primary'>
