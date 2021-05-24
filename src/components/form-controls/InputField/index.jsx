@@ -11,7 +11,7 @@ InputField.propTypes = {
 };
 
 function InputField(props) {
-  const { name, label, disabled, form, type } = props;
+  const { name, label, disabled, form } = props;
 
   return (
     <>
@@ -30,8 +30,6 @@ function InputField(props) {
               helperText={fieldState.error?.message}
               variant='outlined'
               margin='normal'
-              fullWidth
-              type={type || 'text'}
             />
           );
         }}

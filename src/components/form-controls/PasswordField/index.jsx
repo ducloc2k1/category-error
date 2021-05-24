@@ -1,3 +1,4 @@
+import { Checkbox, FormHelperText } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -17,13 +18,13 @@ PasswordField.propTypes = {
 };
 
 function PasswordField(props) {
-  const { name, label, disabled, form } = props;
+  const { name, label, form, disabled } = props;
 
   const [values, setValues] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleChange = (prop) => (event) => {
+  const handleChange = (event) => {
     setValues(event.target.value);
   };
 
@@ -33,33 +34,42 @@ function PasswordField(props) {
 
   return (
     <>
-      <Controller
-        name={name}
-        control={form.control}
-        rules={{ maxLength: 2 }}
-        render={({ field, fieldState }) => {
-          const hasError = fieldState.error && fieldState.isTouched;
-          return (
-            <FormControl variant='outlined' fullWidth margin='normal'>
-              <InputLabel htmlFor='outlined-adornment-password'>{label}</InputLabel>
-              <OutlinedInput
-                id={name}
-                type={showPassword ? 'text' : 'password'}
-                value={values}
-                onChange={handleChange('password')}
-                label={label}
-                endAdornment={
-                  <InputAdornment position='end'>
-                    <IconButton aria-label='toggle password visibility' onClick={handleClickShowPassword} edge='end'>
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-          );
-        }}
-      ></Controller>
+      <FormControl fullWidth variant='outlined' margin='normal'>
+        <InputLabel htmlFor={name}>{name}</InputLabel>
+        <Controller
+          name={name}
+          control={form.control}
+          type={showPassword ? 'text' : 'password'}
+          label={label}
+          render={({
+            field: { onChange, onBlur, value, name, ref },
+            fieldState: { invalid, isTouched, isDirty, error },
+            formState,
+          }) => {
+            const hasError = error;
+            console.log(error);
+            return (
+              <>
+                <OutlinedInput
+                  id={name}
+                  type={showPassword ? 'text' : 'password'}
+                  onChange={onChange}
+                  label={label}
+                  error={!!hasError}
+                  endAdornment={
+                    <InputAdornment position='end'>
+                      <IconButton aria-label='toggle password visibility' onClick={handleClickShowPassword}>
+                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+                <FormHelperText error={!!hasError}>{error?.message}</FormHelperText>
+              </>
+            );
+          }}
+        ></Controller>
+      </FormControl>
     </>
   );
 }

@@ -8,14 +8,14 @@ import { useEffect } from 'react';
 import productApi from './api/productApi';
 
 function App() {
-  useEffect(() => {
-    const fecthProduct = async () => {
-      const params = { _limit: 5 };
-      const listProduct = await productApi.getAll(params);
-      console.log(listProduct);
-    };
-    fecthProduct();
-  }, []);
+  // useEffect(() => {
+  //   const fecthProduct = async () => {
+  //     const params = { _limit: 5 };
+  //     const listProduct = await productApi.getAll(params);
+  //     console.log(listProduct);
+  //   };
+  //   fecthProduct();
+  // }, []);
   return (
     <div className='App'>
       <Header />
