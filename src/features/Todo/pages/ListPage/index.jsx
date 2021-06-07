@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
-import TodoList from "../../components/TodoList";
-import queryString from "query-string";
-import { useHistory, useLocation, useRouteMatch } from "react-router";
-import TodoForm from "../../components/TodoForm";
+import React, { useEffect, useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
+import TodoList from '../../components/TodoList';
+import queryString from 'query-string';
+import { useHistory, useLocation, useRouteMatch } from 'react-router';
+import TodoForm from '../../components/TodoForm';
 
 ListPage.propTypes = {};
 
@@ -11,20 +11,20 @@ function ListPage(props) {
   const initialState = [
     {
       id: 1,
-      title: "eat",
-      status: "completed",
+      title: 'eat',
+      status: 'completed',
       price: 400,
     },
     {
       id: 2,
-      title: "sleep",
-      status: "new",
+      title: 'sleep',
+      status: 'new',
       price: 500,
     },
     {
       id: 3,
-      title: "code",
-      status: "new",
+      title: 'code',
+      status: 'new',
       price: 900,
     },
   ];
@@ -33,7 +33,7 @@ function ListPage(props) {
     const newTodo = {
       id: todoList.length + 1,
       title: values.title,
-      status: "new",
+      status: 'new',
     };
 
     const newTodoList = [...todoList, newTodo];
@@ -51,12 +51,12 @@ function ListPage(props) {
 
   const [filterTodo, setFilterTodo] = useState(() => {
     const statusObj = queryString.parse(location.search);
-    return statusObj["status"] || "all";
+    return statusObj['status'] || 'all';
   });
 
   useEffect(() => {
     const statusObj = queryString.parse(location.search);
-    setFilterTodo(statusObj.status || "all");
+    setFilterTodo(statusObj.status || 'all');
   }, [location.search]);
 
   let handleTodoClick = (currentTodo, index) => {
@@ -64,7 +64,7 @@ function ListPage(props) {
 
     copyTodos[index] = {
       ...copyTodos[index],
-      status: copyTodos[index].status == "new" ? "completed" : "new",
+      status: copyTodos[index].status == 'new' ? 'completed' : 'new',
     };
 
     setTodoList(copyTodos);
@@ -74,7 +74,7 @@ function ListPage(props) {
 
   let handleShowAll = () => {
     const queryParams = {
-      status: "all",
+      status: 'all',
     };
 
     history.push({
@@ -85,7 +85,7 @@ function ListPage(props) {
 
   let handleShowCompleted = () => {
     const queryParams = {
-      status: "completed",
+      status: 'completed',
     };
 
     history.push({
@@ -96,7 +96,7 @@ function ListPage(props) {
 
   let handleShowNew = () => {
     const queryParams = {
-      status: "new",
+      status: 'new',
     };
 
     history.push({
@@ -106,7 +106,7 @@ function ListPage(props) {
   };
 
   const rederedTodoList = todoList.filter((todo) => {
-    return filterTodo === "all" || todo.status === filterTodo;
+    return filterTodo === 'all' || todo.status === filterTodo;
   });
 
   return (

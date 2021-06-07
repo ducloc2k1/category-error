@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import store from '../../app/store';
 import { decrease, increase } from './counterSlice';
 
 CounterFeature.propTypes = {};
@@ -18,6 +19,8 @@ function CounterFeature(props) {
   function handleDecrementClick() {
     dispatch(decrease());
   }
+
+  console.log(store.getState());
 
   return (
     <div>

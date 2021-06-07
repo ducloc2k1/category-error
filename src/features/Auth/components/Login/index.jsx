@@ -1,41 +1,42 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import RegisterForm from '../RegisterForm';
-import { register } from '../../userSlice.js';
+import { login, register } from '../../userSlice.js';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useSnackbar } from 'notistack';
+import LoginForm from '../LoginForm';
 
-Register.propTypes = {};
+Login.propTypes = {};
 
-function Register(props) {
+function Login(props) {
+  const { handleClose } = props;
+
   const dispatch = useDispatch();
 
   const { enqueueSnackbar } = useSnackbar();
 
   async function handleSubmit(values) {
     // set default username = email;
+    // values.username = values.email;
+    // delete values.email;
 
     try {
-      values.username = values.email;
+      const action = login(values);
 
-      const action = register(values);
+      const loginThunk = await dispatch(action);
 
-      const registerThunk = await dispatch(action);
+      const result = await unwrapResult(loginThunk);
 
-      console.log(registerThunk);
-
-      const result = await unwrapResult(registerThunk);
-
-      enqueueSnackbar('đăng ký thành công !!!');
+      handleClose();
     } catch (error) {
       enqueueSnackbar(error.message, { variant: 'error', resumeHideDuration: 1000 });
     }
   }
   return (
     <div>
-      <RegisterForm onSubmit={handleSubmit} />
+      <LoginForm onSubmit={handleSubmit} />
     </div>
   );
 }
 
-export default Register;
+export default Login;

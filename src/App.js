@@ -6,6 +6,7 @@ import DetailPage from './features/Todo/pages/DetailPage';
 import AlbumFeature from './features/Album';
 import { useEffect } from 'react';
 import productApi from './api/productApi';
+import userApi from './api/userApi';
 
 function App() {
   // useEffect(() => {
@@ -16,6 +17,7 @@ function App() {
   //   };
   //   fecthProduct();
   // }, []);
+
   return (
     <div className='App'>
       <Header />

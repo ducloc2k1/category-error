@@ -47,7 +47,6 @@ function PasswordField(props) {
             formState,
           }) => {
             const hasError = error;
-            console.log(error);
             return (
               <>
                 <OutlinedInput
@@ -59,7 +58,7 @@ function PasswordField(props) {
                   endAdornment={
                     <InputAdornment position='end'>
                       <IconButton aria-label='toggle password visibility' onClick={handleClickShowPassword}>
-                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
                   }
