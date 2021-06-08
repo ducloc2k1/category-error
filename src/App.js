@@ -7,6 +7,7 @@ import AlbumFeature from './features/Album';
 import { useEffect } from 'react';
 import productApi from './api/productApi';
 import userApi from './api/userApi';
+import ProductFeature from './features/Product';
 
 function App() {
   // useEffect(() => {
@@ -25,6 +26,7 @@ function App() {
         <Route path='/todos' component={TodoFeature} />
         <Route path='/todos-list/:idTodo' component={DetailPage} />
         <Route path='/album' component={AlbumFeature} />
+        <Route path='/products' component={ProductFeature}></Route>
       </Switch>
       {/* <TodoFeature /> */}
       <CounterFeature />
