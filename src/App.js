@@ -1,24 +1,13 @@
 import { Route, Switch } from 'react-router';
 import Header from './components/Header';
+import AlbumFeature from './features/Album';
 import CounterFeature from './features/Counter';
+import ProductFeature from './features/Product';
 import TodoFeature from './features/Todo';
 import DetailPage from './features/Todo/pages/DetailPage';
-import AlbumFeature from './features/Album';
-import { useEffect } from 'react';
-import productApi from './api/productApi';
-import userApi from './api/userApi';
-import ProductFeature from './features/Product';
+import './App.css';
 
 function App() {
-  // useEffect(() => {
-  //   const fecthProduct = async () => {
-  //     const params = { _limit: 5 };
-  //     const listProduct = await productApi.getAll(params);
-  //     console.log(listProduct);
-  //   };
-  //   fecthProduct();
-  // }, []);
-
   return (
     <div className='App'>
       <Header />
@@ -29,7 +18,7 @@ function App() {
         <Route path='/products' component={ProductFeature}></Route>
       </Switch>
       {/* <TodoFeature /> */}
-      <CounterFeature />
+      {/* <CounterFeature /> */}
     </div>
   );
 }

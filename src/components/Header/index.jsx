@@ -1,4 +1,4 @@
-import { Box, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { Box, Container, Grid, IconButton, Menu, MenuItem } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+
+  toolBar: {
+    padding: '0px',
+  },
+
   storeIcon: {
     marginRight: theme.spacing(2),
     cursor: 'pointer',
@@ -96,45 +101,47 @@ function Header(props) {
   return (
     <>
       <AppBar position='static'>
-        <Toolbar>
-          <Link to='/' className={classes.link}>
-            <StoreIcon className={classes.storeIcon}></StoreIcon>
-          </Link>
-          <Typography variant='h6' className={classes.title}>
-            Shopping
-          </Typography>
-          <NavLink className='nav-link' to='/todos'>
-            <Button className={classes.link}>Todos</Button>
-          </NavLink>
-          <NavLink className='nav-link' to='/album'>
-            <Button className={classes.link}>Albums</Button>
-          </NavLink>
-          {hasLogin && (
-            <>
-              <IconButton onClick={handleClick} aria-controls='simple-menu' aria-haspopup='true'>
-                <AccountCircleIcon color='inherit' />
-              </IconButton>
-              <Menu
-                anchorEl={anchorEl}
-                getContentAnchorEl={null}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-                open={openMenu}
-                elevation={0}
-                onClose={handleCloseMenu}
-              >
-                <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </Menu>
-            </>
-            // <MenuListComposition handleLogout={handleLogout} />
-          )}
-          {!hasLogin && (
-            <Button color='inherit' onClick={handleClickOpen}>
-              Login
-            </Button>
-          )}
-        </Toolbar>
+        <Container>
+          <Toolbar className={classes.toolBar}>
+            <Link to='/' className={classes.link}>
+              <StoreIcon className={classes.storeIcon}></StoreIcon>
+            </Link>
+            <Typography variant='h6' className={classes.title}>
+              Shopping
+            </Typography>
+            <NavLink className='nav-link' to='/todos'>
+              <Button className={classes.link}>Todos</Button>
+            </NavLink>
+            <NavLink className='nav-link' to='/album'>
+              <Button className={classes.link}>Albums</Button>
+            </NavLink>
+            {hasLogin && (
+              <>
+                <IconButton onClick={handleClick} aria-controls='simple-menu' aria-haspopup='true'>
+                  <AccountCircleIcon color='inherit' />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  getContentAnchorEl={null}
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                  transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                  open={openMenu}
+                  elevation={0}
+                  onClose={handleCloseMenu}
+                >
+                  <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+              </>
+              // <MenuListComposition handleLogout={handleLogout} />
+            )}
+            {!hasLogin && (
+              <Button color='inherit' onClick={handleClickOpen}>
+                Login
+              </Button>
+            )}
+          </Toolbar>
+        </Container>
       </AppBar>
 
       <Dialog
