@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import { Box, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import categoryApi from 'api/categoryApi';
+import React, { useEffect, useState } from 'react';
 
 FilterByCategory.propTypes = {};
 
@@ -10,6 +11,25 @@ function FilterByCategory({ onChange }) {
   const handleOnClick = (filter) => {
     onChange(filter);
   };
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      padding: theme.spacing(2),
+    },
+
+    menu: {
+      listStyle: 'none',
+      '& > li': {
+        marginTop: theme.spacing(1),
+        '&:hover': {
+          cursor: 'pointer',
+        },
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   useEffect(() => {
     (async function () {
       try {
@@ -30,8 +50,9 @@ function FilterByCategory({ onChange }) {
     })();
   }, []);
   return (
-    <div>
-      <ul>
+    <Box className={classes.root}>
+      <Typography variant='subtitle2'>Danh sach loc san pham</Typography>
+      <ul className={classes.menu}>
         {categoryList.map((category) => (
           <li
             onClick={() => {
@@ -39,11 +60,11 @@ function FilterByCategory({ onChange }) {
             }}
             key={category.id}
           >
-            {category.name}
+            <Typography variant='body2'>{category.name}</Typography>
           </li>
         ))}
       </ul>
-    </div>
+    </Box>
   );
 }
 

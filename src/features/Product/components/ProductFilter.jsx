@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Box } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import FilterByCategory from './filters/FilterByCategory';
+import FilterByPrice from './filters/FilterByPrice';
 
 ProductFilter.propTypes = {
   filters: PropTypes.object.isRequired,
@@ -13,15 +14,18 @@ function ProductFilter({ filters, onChange }) {
   const handleCategoryChange = (newCategoryId) => {
     if (!onChange) return;
     const newFilters = {
-      ...filters,
       'category.id': newCategoryId,
     };
     onChange(newFilters);
   };
+
+  const handlePriceChange = (newPrice) => {
+    if (onChange) onChange(newPrice);
+  };
   return (
     <Box>
-      <Typography>Danh sach loc san pham</Typography>
       <FilterByCategory onChange={handleCategoryChange} />
+      <FilterByPrice onChange={handlePriceChange} />
     </Box>
   );
 }
