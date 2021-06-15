@@ -51,7 +51,7 @@ function FilterByCategory({ onChange }) {
   }, []);
   return (
     <Box className={classes.root}>
-      <Typography variant='subtitle2'>Danh sach loc san pham</Typography>
+      <Typography variant='subtitle2'>Danh mục sản phẩm</Typography>
       <ul className={classes.menu}>
         {categoryList.map((category) => (
           <li
