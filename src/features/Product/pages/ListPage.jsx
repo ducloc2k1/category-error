@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import ProductList from 'features/Product/components/ProductList';
 import { Pagination } from '@material-ui/lab';
 import ProductSort from '../components/ProductSort';
+import ProductFilter from '../components/ProductFilter';
 
 ListPage.propTypes = {};
 
@@ -42,6 +43,16 @@ function ListPage(props) {
     });
   };
 
+  const handleFilterChange = (newFilter) => {
+    console.log(newFilter);
+    setFilters((preFilters) => {
+      return {
+        ...preFilters,
+        ...newFilter,
+      };
+    });
+  };
+
   const handleSortchange = (sort) => {
     setFilters((preFilters) => {
       return {
@@ -74,7 +85,9 @@ function ListPage(props) {
       <Container>
         <Grid container spacing={1}>
           <Grid className={classes.left} item>
-            <Paper elevation={0}>left column</Paper>
+            <Paper elevation={0}>
+              <ProductFilter onChange={handleFilterChange} filters={filters}></ProductFilter>
+            </Paper>
           </Grid>
           <Grid className={classes.right} item>
             <Paper elevation={0}>
