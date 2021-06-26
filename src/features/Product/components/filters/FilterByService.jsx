@@ -39,14 +39,22 @@ function FilterByPrice({ onChange, filters }) {
         {[
           { value: 'isPromotion', label: 'Có khuyến mãi' },
           { value: 'isFreeShip', label: 'Vận chuyển miễn phí' },
-        ].map((service) => (
-          <FormControlLabel
-            control={
-              <Checkbox checked={filters['value']} onChange={handleOnchange} name={service['value']} color='primary' />
-            }
-            label={service['label']}
-          />
-        ))}
+        ].map((service) => {
+          return (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  // !! để fix A component is changing an uncontrolled input of type text to be controlled error in ReactJS
+                  checked={!!filters[service.value]}
+                  onChange={handleOnchange}
+                  name={service['value']}
+                  color='primary'
+                />
+              }
+              label={service['label']}
+            />
+          );
+        })}
       </Box>
     </Box>
   );

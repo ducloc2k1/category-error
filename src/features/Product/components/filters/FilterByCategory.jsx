@@ -42,7 +42,6 @@ function FilterByCategory({ onChange }) {
             };
           })
         );
-        console.log(categories);
       } catch (error) {
         console.log('Failed to fetch', error);
       }

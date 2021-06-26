@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
-import TodoList from '../../components/TodoList';
 import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useRouteMatch } from 'react-router';
 import TodoForm from '../../components/TodoForm';
+import TodoList from '../../components/TodoList';
 
 ListPage.propTypes = {};
 
@@ -64,7 +63,7 @@ function ListPage(props) {
 
     copyTodos[index] = {
       ...copyTodos[index],
-      status: copyTodos[index].status == 'new' ? 'completed' : 'new',
+      status: copyTodos[index].status === 'new' ? 'completed' : 'new',
     };
 
     setTodoList(copyTodos);

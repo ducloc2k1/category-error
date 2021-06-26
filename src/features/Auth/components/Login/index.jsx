@@ -1,9 +1,8 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import RegisterForm from '../RegisterForm';
-import { login, register } from '../../userSlice.js';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useSnackbar } from 'notistack';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../userSlice.js';
 import LoginForm from '../LoginForm';
 
 Login.propTypes = {};

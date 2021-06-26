@@ -1,11 +1,10 @@
 import { Route, Switch } from 'react-router';
+import './App.css';
 import Header from './components/Header';
 import AlbumFeature from './features/Album';
-import CounterFeature from './features/Counter';
 import ProductFeature from './features/Product';
 import TodoFeature from './features/Todo';
 import DetailPage from './features/Todo/pages/DetailPage';
-import './App.css';
 
 function App() {
   return (

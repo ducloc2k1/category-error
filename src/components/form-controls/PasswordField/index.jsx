@@ -1,4 +1,4 @@
-import { Checkbox, FormHelperText } from '@material-ui/core';
+import { FormHelperText } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -18,15 +18,9 @@ PasswordField.propTypes = {
 };
 
 function PasswordField(props) {
-  const { name, label, form, disabled } = props;
-
-  const [values, setValues] = useState('');
+  const { name, label, form } = props;
 
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleChange = (event) => {
-    setValues(event.target.value);
-  };
 
   const handleClickShowPassword = () => {
     setShowPassword((preState) => !preState);
@@ -41,11 +35,7 @@ function PasswordField(props) {
           control={form.control}
           type={showPassword ? 'text' : 'password'}
           label={label}
-          render={({
-            field: { onChange, onBlur, value, name, ref },
-            fieldState: { invalid, isTouched, isDirty, error },
-            formState,
-          }) => {
+          render={({ field: { onChange, onBlur, name, ref }, fieldState: { error } }) => {
             const hasError = error;
             return (
               <>

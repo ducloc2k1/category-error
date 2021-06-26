@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Box } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import React from 'react';
 import FilterByCategory from './filters/FilterByCategory';
-import FilterByService from './filters/FilterByService';
 import FilterByPrice from './filters/FilterByPrice';
+import FilterByService from './filters/FilterByService';
 
 ProductFilter.propTypes = {
   filters: PropTypes.object.isRequired,

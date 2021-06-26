@@ -6,10 +6,21 @@ import ProductList from 'features/Product/components/ProductList';
 import { Pagination } from '@material-ui/lab';
 import ProductSort from '../components/ProductSort';
 import ProductFilter from '../components/ProductFilter';
+import FilterView from '../components/FilterView';
+import { useHistory, useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 ListPage.propTypes = {};
 
 function ListPage(props) {
+  const location = useLocation();
+
+  const history = useHistory();
+
+  const queryParams = queryString.parse(location.search);
+
+  console.log(queryParams);
+
   const [renderList, setRenderList] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -17,10 +28,17 @@ function ListPage(props) {
   const [pagination, setPagination] = useState({ total: 100, limit: 9, page: 1 });
 
   const [filters, setFilters] = useState({
-    _limit: 9,
-    _page: 1,
-    _sort: 'salePrice:ASC',
+    ...queryParams,
+    _limit: Number.parseInt(queryParams._limit) || 9,
+    _page: Number.parseInt(queryParams._page) || 1,
   });
+
+  useEffect(() => {
+    history.push({
+      pathname: history.location.pathname,
+      search: queryString.stringify(filters),
+    });
+  }, [filters]);
 
   useEffect(() => {
     (async () => {
@@ -29,6 +47,7 @@ function ListPage(props) {
         const rs = await productApi.getAll(filters);
         setRenderList(rs.data);
         setPagination(rs.pagination);
+        console.log(pagination);
       } catch (error) {}
       setLoading(false);
     })();
@@ -44,7 +63,6 @@ function ListPage(props) {
   };
 
   const handleFilterChange = (newFilter) => {
-    console.log(newFilter);
     setFilters((preFilters) => {
       return {
         ...preFilters,
@@ -62,9 +80,13 @@ function ListPage(props) {
     });
   };
 
+  const setNewFilters = (newFilter) => {
+    setFilters(newFilter);
+  };
+
   const useStyles = makeStyles({
     left: {
-      width: '375px',
+      width: '300px',
     },
 
     right: {
@@ -93,6 +115,9 @@ function ListPage(props) {
             <Paper elevation={0}>
               <Box>
                 <ProductSort currentSort={filters._sort} onChange={handleSortchange} />
+              </Box>
+              <Box>
+                <FilterView filters={filters} onChange={setNewFilters} />
               </Box>
               {loading ? <ProductSkeleton /> : <ProductList data={renderList} />}
               <Box>
