@@ -6,7 +6,7 @@ const initialState = { current: JSON.parse(localStorage.getItem('user')) || {}, 
 
 export const register = createAsyncThunk('user/register', async function (payload) {
   // await productApi.get('notIdProduct');
-  // debugger;
+  debugger;
   const data = await userApi.register(payload);
 
   localStorage.setItem(StorageKey.TOKEN, data.jwt);
@@ -18,7 +18,6 @@ export const register = createAsyncThunk('user/register', async function (payloa
 
 export const login = createAsyncThunk('user/login', async function (payload) {
   // await productApi.get('notIdProduct');
-  // debugger;
   const data = await userApi.login(payload);
 
   localStorage.setItem(StorageKey.TOKEN, data.jwt);

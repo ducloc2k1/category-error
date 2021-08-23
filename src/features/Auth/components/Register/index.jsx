@@ -24,6 +24,8 @@ function Register(props) {
 
       console.log(registerThunk);
 
+      debugger;
+
       const result = await unwrapResult(registerThunk);
 
       enqueueSnackbar('đăng ký thành công !!!');

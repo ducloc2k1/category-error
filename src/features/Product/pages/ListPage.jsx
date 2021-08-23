@@ -19,8 +19,6 @@ function ListPage(props) {
 
   const queryParams = queryString.parse(location.search);
 
-  console.log(queryParams);
-
   const [renderList, setRenderList] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -31,6 +29,7 @@ function ListPage(props) {
     ...queryParams,
     _limit: Number.parseInt(queryParams._limit) || 9,
     _page: Number.parseInt(queryParams._page) || 1,
+    _sort: queryParams._sort || 'salePrice:ASC',
   });
 
   useEffect(() => {
@@ -38,20 +37,19 @@ function ListPage(props) {
       pathname: history.location.pathname,
       search: queryString.stringify(filters),
     });
-  }, [filters]);
+  }, [filters, history]);
 
   useEffect(() => {
     (async () => {
+      debugger;
       try {
-        // setLoading(true);
         const rs = await productApi.getAll(filters);
         setRenderList(rs.data);
         setPagination(rs.pagination);
-        console.log(pagination);
       } catch (error) {}
       setLoading(false);
     })();
-  }, [filters]);
+  }, [filters, history]);
 
   const handleOnchange = (e, page) => {
     setFilters((preFilters) => {
@@ -64,6 +62,7 @@ function ListPage(props) {
 
   const handleFilterChange = (newFilter) => {
     setFilters((preFilters) => {
+      debugger;
       return {
         ...preFilters,
         ...newFilter,

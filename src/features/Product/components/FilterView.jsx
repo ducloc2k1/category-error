@@ -1,5 +1,6 @@
 import { Box, Chip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import categoryApi from '../../../api/categoryApi';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
@@ -10,6 +11,11 @@ FilterView.propTypes = {
 };
 
 function FilterView({ filters = {}, onChange = null }) {
+  // useEffect(async () => {
+  //   if (!filters['category.id']) return;
+
+  //   const categoryFilter = await categoryApi.get();
+  // }, [filters]);
   const FILTER_LIST = [
     {
       id: 1,
@@ -57,11 +63,25 @@ function FilterView({ filters = {}, onChange = null }) {
       },
       onToggle: () => {},
     },
+
+    {
+      id: 4,
+      getLabel: async (filters) => {
+        const categoryFilter = await categoryApi.get();
+        console.log(categoryFilter);
+      },
+      isActive: (filters) => true,
+      isVisible: (filters) => filters['category.id'],
+      isRemovable: true,
+      onToggle: () => {},
+      onRemove: () => {},
+    },
   ];
 
   const visibleFilter = useMemo(() => {
     return FILTER_LIST.filter((x) => x.isVisible(filters));
-  }, [filters]);
+  }, [filters, FILTER_LIST]);
+
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',

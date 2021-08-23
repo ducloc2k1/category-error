@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles, Tab, Tabs } from '@material-ui/core';
 
 ProductSort.propTypes = {
-  currentSort: PropTypes.number,
+  currentSort: PropTypes.string,
   onChange: PropTypes.func,
 };
 

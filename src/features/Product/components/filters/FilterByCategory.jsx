@@ -1,6 +1,7 @@
 import { Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import categoryApi from 'api/categoryApi';
+import productApi from 'api/productApi';
 import React, { useEffect, useState } from 'react';
 
 FilterByCategory.propTypes = {};
@@ -54,7 +55,7 @@ function FilterByCategory({ onChange }) {
       <ul className={classes.menu}>
         {categoryList.map((category) => (
           <li
-            onClick={() => {
+            onClick={async () => {
               handleOnClick(category.id);
             }}
             key={category.id}
